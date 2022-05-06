@@ -1,4 +1,4 @@
-# comemarket - scalable eCommerce Platform with MicroServices
+# ComeMarket - scalable eCommerce Platform with MicroServices
 
 _Tech Stack_
 - Node
