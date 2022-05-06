@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 4000;
 
-let posts = [];
+const posts = [];
 
 app.use((req, res, next) => {
   console.log(`${req.method} - ${req.url} - RESPONSE: ${res.statusCode}`);
@@ -13,18 +13,14 @@ app.use((req, res, next) => {
 });
 
 app.get('/posts', (req, res) => {
-  console.log('Post Service: GET ');
+  console.log('Post Service: Getting all Posts');
   res.send(posts);
 });
 
 app.post('/posts', (req, res) => {
   const id = randomBytes(4).toString('hex');
   const { title, content } = req.body;
-
   posts.push({ id, title, content });
-
-  console.log('All POSTS: ', posts);
-  //   posts.push(posts[id]);
 
   res.status(201).send(posts[id]);
 });
