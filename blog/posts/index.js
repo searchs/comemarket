@@ -1,11 +1,13 @@
 const express = require('express');
 const { randomBytes } = require('crypto');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 4000;
 
-const posts = [];
+const posts = {};
 
 app.use((req, res, next) => {
   console.log(`${req.method} - ${req.url} - RESPONSE: ${res.statusCode}`);
@@ -19,9 +21,9 @@ app.get('/posts', (req, res) => {
 
 app.post('/posts', (req, res) => {
   const id = randomBytes(4).toString('hex');
-  const { title, content } = req.body;
-  posts.push({ id, title, content });
-
+  const { title } = req.body;
+  // posts.push({ id, title });
+  posts[id] = { id: id, title: title };
   res.status(201).send(posts[id]);
 });
 
